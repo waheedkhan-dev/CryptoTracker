@@ -1,9 +1,8 @@
 package com.wk.cryptotracker.crypto.presentation.models
 
-import android.icu.number.NumberFormatter
 import androidx.annotation.DrawableRes
 import com.wk.cryptotracker.crypto.domain.Coin
-import com.wk.cryptotracker.util.getDrawableIdForCoin
+import com.wk.cryptotracker.core.presentation.util.getDrawableIdForCoin
 import java.text.NumberFormat
 import java.util.Locale
 

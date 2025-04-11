@@ -1,4 +1,4 @@
-package com.wk.cryptotracker.util
+package com.wk.cryptotracker.core.presentation.util
 
 import com.wk.cryptotracker.R
 
