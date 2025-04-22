@@ -30,7 +30,9 @@ class CoinListViewModel(private val coinDataSource: CoinDataSource) : ViewModel(
     fun onAction(action: CoinListAction) {
         when (action) {
             is CoinListAction.OnCoinClicked -> {
-                // Handle coin click
+                _state.update {
+                    it.copy(selectedCoin = action.coinUi)
+                }
             }
 
             CoinListAction.OnRefresh -> loadCoins()

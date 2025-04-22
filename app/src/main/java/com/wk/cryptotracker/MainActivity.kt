@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.wk.cryptotracker.core.presentation.util.ObserveAsEvents
 import com.wk.cryptotracker.core.presentation.util.toString
+import com.wk.cryptotracker.crypto.presentation.coin_detail.CoinDetailScreen
 import com.wk.cryptotracker.crypto.presentation.coin_list.CoinListEvent
 import com.wk.cryptotracker.crypto.presentation.coin_list.CoinListScreen
 import com.wk.cryptotracker.crypto.presentation.coin_list.CoinListViewModel
@@ -46,8 +47,20 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     }
+                    when {
+                        state.selectedCoin != null -> {
+                            CoinDetailScreen(
+                                state = state,
+                                modifier = Modifier.padding(innerPadding)
+                            )
+                        }
 
-                    CoinListScreen(state = state, modifier = Modifier.padding(innerPadding))
+                        else -> {
+                            CoinListScreen(state = state, modifier = Modifier.padding(innerPadding), onAction = viewmodel::onAction)
+                        }
+                    }
+
+
                 }
             }
         }
