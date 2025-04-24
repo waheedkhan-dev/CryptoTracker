@@ -16,6 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.wk.cryptotracker.core.navigation.AdaptiveCoinListDetailPane
 import com.wk.cryptotracker.core.presentation.util.ObserveAsEvents
 import com.wk.cryptotracker.core.presentation.util.toString
 import com.wk.cryptotracker.crypto.presentation.coin_detail.CoinDetailScreen
@@ -32,35 +33,9 @@ class MainActivity : ComponentActivity() {
         setContent {
             CryptoTrackerTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    val viewmodel = koinViewModel<CoinListViewModel>()
-                    val state by viewmodel.state.collectAsStateWithLifecycle()
-
-                    val context = LocalContext.current
-                    ObserveAsEvents(events = viewmodel.event) { event ->
-                        when (event) {
-                            is CoinListEvent.Error -> {
-                                Toast.makeText(
-                                    context,
-                                    event.error.toString(context = context),
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
-                        }
-                    }
-                    when {
-                        state.selectedCoin != null -> {
-                            CoinDetailScreen(
-                                state = state,
-                                modifier = Modifier.padding(innerPadding)
-                            )
-                        }
-
-                        else -> {
-                            CoinListScreen(state = state, modifier = Modifier.padding(innerPadding), onAction = viewmodel::onAction)
-                        }
-                    }
-
-
+                   AdaptiveCoinListDetailPane(
+                       modifier = Modifier.padding(innerPadding),
+                   )
                 }
             }
         }
